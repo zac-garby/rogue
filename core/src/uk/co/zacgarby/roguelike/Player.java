@@ -10,6 +10,7 @@ public class Player extends Entity {
 		x = 0;
 		y = 0;
 		xp = 0;
+		stats = new Stats();
 	}
 
 	public int getXP() {

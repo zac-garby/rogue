@@ -6,27 +6,33 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Main extends ApplicationAdapter {
-	SpriteBatch batch;
+	public static Player player;
+	
+	public SpriteBatch batch;
 	
 	@Override
-	public void create () {
+	public void create () {		
 		batch = new SpriteBatch();
 		
-		Player p = new Player("Unnamed");
-		p.addXP(10);
-		System.out.println(p.getLevel());
+		player = new Player("Zac");
+		
+		batch.setProjectionMatrix(batch.getProjectionMatrix().scale(4, 4, 1));
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
 		batch.begin();
+		Sidebar.draw(batch);
+		Font.normal.draw("abcdefghijklmnopqrstuvwxyz 0123456789", batch, 5, 5);
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
+		Sidebar.dispose();
 	}
 }
