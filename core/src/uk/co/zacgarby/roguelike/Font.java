@@ -10,7 +10,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Font {
-	public static Font normal = new Font("fonts/font.png", "abcdefghijklmnopqrstuvwxyz0123456789", new Color(0xcbdbfcff));
+	public static Font normal = new Font("fonts/font.png", "abcdefghijklmnopqrstuvwxyz0123456789!.,:;()[]-+*÷", new Color(0xcbdbfcff));
+	public static Font gold = new Font("fonts/font.png", "abcdefghijklmnopqrstuvwxyz0123456789!.,:;()[]-+*÷", new Color(0xeae352ff), new Color(0xdfae26ff));
 	
 	public int spaceWidth = 3;
 	public boolean caseSensitive = false;
@@ -19,7 +20,7 @@ public class Font {
 	
 	// Loads a font from a file where each character is separated by a vertical line of invisible
 	// pixels, and the characters are arranged horizontally according to the sequence in 'layout'.
-	public Font(String filename, String layout, Color bg) {
+	public Font(String filename, String layout, Color c1, Color c2) {
 		Pixmap p = new Pixmap(Gdx.files.internal(filename));
 		
 		int start = 0;
@@ -32,8 +33,10 @@ public class Font {
 				empty = true;
 				
 				for (int y = 0; y < p.getHeight(); y++) {
-					if ((p.getPixel(end, y) & 0xFF) > 0) { // If the pixel is visible
+					int pixel = p.getPixel(end, y);
+					if (pixel == Color.rgba8888(Color.WHITE) || pixel == Color.rgba8888(Color.BLACK)) { // If the pixel is visible
 						empty = false;
+						break;
 					}
 				}
 				
@@ -45,13 +48,20 @@ public class Font {
 			int width = (end - start) + 1;
 			
 			Pixmap cp = new Pixmap(width, p.getHeight(), p.getFormat());
-			
-			cp.setColor(bg);
 			for (int x = 0; x < width; x++) {
 				for (int y = 0; y < cp.getHeight(); y++) {
-					if ((p.getPixel(x + start, y) & 0xFF) > 0) {
-						cp.drawPixel(x, y);
+					int pixel = p.getPixel(x + start, y);
+					if ((pixel & 0xFF) == 0) {
+						continue;
 					}
+					
+					if (pixel == Color.rgba8888(Color.WHITE)) {
+						cp.setColor(c1);
+					} else if (pixel == Color.rgba8888(Color.BLACK)) {
+						cp.setColor(c2);
+					}
+					
+					cp.drawPixel(x, y);
 				}
 			}
 			
@@ -59,6 +69,10 @@ public class Font {
 			
 			start = end + 2;
 		}
+	}
+	
+	public Font(String filename, String layout, Color c) {
+		this(filename, layout, c, c);
 	}
 	
 	public Texture get(char c) {
