@@ -14,7 +14,7 @@ public class Main extends ApplicationAdapter {
 	public void create () {		
 		batch = new SpriteBatch();
 		
-		player = new Player("zac");
+		player = new Player("møøse");
 		
 		batch.setProjectionMatrix(batch.getProjectionMatrix().scale(4, 4, 1));
 	}
