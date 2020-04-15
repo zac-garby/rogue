@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Font {
 	public static Font normal = new Font("fonts/font.png", "abcdefghijklmnopqrstuvwxyz0123456789!.,:;()[]-+*÷", new Color(0xcbdbfcff));
 	public static Font gold = new Font("fonts/font.png", "abcdefghijklmnopqrstuvwxyz0123456789!.,:;()[]-+*÷", new Color(0xeae352ff), new Color(0xdfae26ff));
-	public static Font name = new Font("fonts/name-font.png", "abcdefghijklmnopqrstuvwxyz", new Color(0xcbdbfcff), new Color(0xffffffff));
+	public static Font name = new Font("fonts/name-font.png", "abcdefghijklmnopqrstuvwxyzàáâãäåçèéêëìíîïñòóôõöùúûüýÿ", new Color(0xcbdbfcff), new Color(0xffffffff));
 	
 	public int spaceWidth = 3;
 	public boolean caseSensitive = false;
