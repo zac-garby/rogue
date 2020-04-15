@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Font {
 	public static Font normal = new Font("fonts/font.png", "abcdefghijklmnopqrstuvwxyz0123456789!.,:;()[]-+*÷", new Color(0xcbdbfcff));
 	public static Font gold = new Font("fonts/font.png", "abcdefghijklmnopqrstuvwxyz0123456789!.,:;()[]-+*÷", new Color(0xeae352ff), new Color(0xdfae26ff));
+	public static Font name = new Font("fonts/name-font.png", "abcdefghijklmnopqrstuvwxyz", new Color(0xcbdbfcff), new Color(0xffffffff));
 	
 	public int spaceWidth = 3;
 	public boolean caseSensitive = false;
@@ -94,10 +95,37 @@ public class Font {
 			
 			if (t == null) {
 				System.out.println("error: unknown character " + String.valueOf(c));
+				continue;
 			}
 			
 			batch.draw(t, x, y);
 			x += t.getWidth() + 1;
 		}
+	}
+	
+	public void drawCentered(String text, SpriteBatch batch, int x, int y) {
+		if (!caseSensitive) {
+			text = text.toLowerCase();
+		}
+		
+		int width = 0;
+		
+		for (char c : text.toCharArray()) {
+			if (c == ' ') {
+				width += spaceWidth;
+				continue;
+			}
+			
+			Texture t = get(c);
+			
+			if (t == null) {
+				System.out.println("error: unknown character " + String.valueOf(c));
+				continue;
+			}
+			
+			width += t.getWidth();
+		}
+		
+		draw(text, batch, x - width/2 - 1, y);
 	}
 }

@@ -14,7 +14,7 @@ public class Main extends ApplicationAdapter {
 	public void create () {		
 		batch = new SpriteBatch();
 		
-		player = new Player("Zac");
+		player = new Player("zac");
 		
 		batch.setProjectionMatrix(batch.getProjectionMatrix().scale(4, 4, 1));
 	}
@@ -23,10 +23,9 @@ public class Main extends ApplicationAdapter {
 	public void render () {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-				
+
 		batch.begin();
 		Sidebar.draw(batch);
-		Font.normal.draw("abcdefghijklmnopqrstuvwxyz 0123456789 !.,:;()[]-+*÷", batch, 5, 5);
 		batch.end();
 	}
 	
