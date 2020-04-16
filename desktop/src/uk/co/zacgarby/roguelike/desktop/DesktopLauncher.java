@@ -9,6 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 1000;
 		config.height = 800;
+		config.title = "Roguelike";
 		new LwjglApplication(new Main(), config);
 	}
 }

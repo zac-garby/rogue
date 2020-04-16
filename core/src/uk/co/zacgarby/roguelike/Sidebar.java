@@ -31,6 +31,6 @@ public final class Sidebar {
 		Font.normal.draw(String.valueOf(Main.player.getGold()), batch, 214, 80);
 		Font.normal.draw(String.valueOf(Main.player.getPlatinum()), batch, 237, 80);
 		
-		Font.name.drawCentered(Main.player.name, batch, 210, 183);
+		Font.name.drawCentered(Main.player.name, batch, 211, 181);
 	}
 }

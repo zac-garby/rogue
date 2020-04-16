@@ -5,8 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import uk.co.zacgarby.roguelike.world.Level;
+
 public class Main extends ApplicationAdapter {
 	public static Player player;
+	public static Level level;
 	
 	public SpriteBatch batch;
 	
@@ -15,6 +18,7 @@ public class Main extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		
 		player = new Player("møøse");
+		level = new Level(16, 16);
 		
 		batch.setProjectionMatrix(batch.getProjectionMatrix().scale(4, 4, 1));
 	}
@@ -25,6 +29,7 @@ public class Main extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
+		level.draw(batch, 0, 0);
 		Sidebar.draw(batch);
 		batch.end();
 	}
