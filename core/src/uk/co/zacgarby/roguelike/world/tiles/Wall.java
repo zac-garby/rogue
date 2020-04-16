@@ -1,14 +1,10 @@
 package uk.co.zacgarby.roguelike.world.tiles;
 
-import java.nio.ByteBuffer;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ByteArray;
 
 import uk.co.zacgarby.roguelike.Main;
 import uk.co.zacgarby.roguelike.world.Tile;
@@ -19,7 +15,6 @@ public class Wall extends Tile {
 	private static Texture template = new Texture(Gdx.files.internal("images/tiles/wall.png"));
 	private static Texture[] textures = new Texture[16];
 	
-	private Texture tex;
 	private boolean texturesGenerated = false;
 	
 	public Wall(int x, int y) {
