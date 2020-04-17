@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import uk.co.zacgarby.roguelike.Main;
+import uk.co.zacgarby.roguelike.world.Level;
 import uk.co.zacgarby.roguelike.world.Tile;
 
 public class Wall extends Tile {
@@ -14,8 +15,9 @@ public class Wall extends Tile {
 	
 	private static Texture template = new Texture(Gdx.files.internal("images/tiles/wall.png"));
 	private static Texture[] textures = new Texture[16];
+	private static boolean texturesGenerated = false;
 	
-	private boolean texturesGenerated = false;
+	private Texture tex;
 	
 	public Wall(int x, int y) {
 		this.x = x;
@@ -28,15 +30,18 @@ public class Wall extends Tile {
 	}
 	
 	@Override
-	public void draw(SpriteBatch batch, int sx, int sy) {
-		// THIS DOESN'T HAVE TO BE DONE EVERY FRAME! probably fix this at some point
+	public void draw(SpriteBatch batch, int sx, int sy) {		
+		batch.draw(tex, sx, sy);
+	}
+	
+	@Override
+	public void initialise(Level level) {
 		int ti = 0;
-		ti |= (Main.level.at(x, y-1) instanceof Wall ? 1 : 0) << 0;
-		ti |= (Main.level.at(x+1, y) instanceof Wall ? 1 : 0) << 1;
-		ti |= (Main.level.at(x, y+1) instanceof Wall ? 1 : 0) << 2;
-		ti |= (Main.level.at(x-1, y) instanceof Wall ? 1 : 0) << 3;
-		
-		batch.draw(textures[ti], sx, sy);
+		ti |= (level.at(x, y-1) instanceof Wall ? 1 : 0) << 0;
+		ti |= (level.at(x+1, y) instanceof Wall ? 1 : 0) << 1;
+		ti |= (level.at(x, y+1) instanceof Wall ? 1 : 0) << 2;
+		ti |= (level.at(x-1, y) instanceof Wall ? 1 : 0) << 3;
+		tex = textures[ti];
 	}
 	
 	private void generateTextures() {

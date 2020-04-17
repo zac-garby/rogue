@@ -2,7 +2,6 @@ package uk.co.zacgarby.roguelike.world;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import uk.co.zacgarby.roguelike.world.tiles.Ground;
 import uk.co.zacgarby.roguelike.world.tiles.Wall;
 
 public class Level {
@@ -17,19 +16,21 @@ public class Level {
 		
 		for (int i = 0; i < w; i++) {
 			for (int j = 0; j < h; j++) {
-				if (Math.random() < 0.2) {
-					tiles[j][i] = new Wall(i, j);
-				} else {
-					tiles[j][i] = new Ground(i, j);
-				}
+				tiles[j][i] = new Wall(i, j);
 			}
 		}
 	}
 	
-	public void draw(SpriteBatch batch, int x, int y) {
+	public void draw(SpriteBatch batch, int camX, int camY) {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				tiles[j][i].draw(batch, x + i * 10, y + j * 10);
+				int sx = -camX + i * 10;
+				int sy = -camY + j * 10;
+				if (sx < -10 || sx > 180 || sy < -10 || sy > 210) {
+					continue;
+				}
+				
+				tiles[j][i].draw(batch, sx, sy);
 			}
 		}
 	}
@@ -40,5 +41,13 @@ public class Level {
 		}
 		
 		return tiles[y][x];
+	}
+	
+	public void initialise() {
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				tiles[y][x].initialise(this);
+			}
+		}
 	}
 }

@@ -7,4 +7,6 @@ public abstract class Tile {
 	public boolean passable;
 	
 	public abstract void draw(SpriteBatch batch, int x, int y);
+	
+	public void initialise(Level level) {}
 }
