@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import uk.co.zacgarby.roguelike.Main;
 import uk.co.zacgarby.roguelike.world.Level;
 import uk.co.zacgarby.roguelike.world.Tile;
 

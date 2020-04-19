@@ -43,6 +43,14 @@ public class Level {
 		return tiles[y][x];
 	}
 	
+	public void set(int x, int y, Tile t) {
+		if (x < 0 || x >= width || y < 0 || y >= height) {
+			return;
+		}
+		
+		tiles[y][x] = t;
+	}
+	
 	public void initialise() {
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
